@@ -56,14 +56,19 @@ public class TestRunner {
 
     }
 
+    /**
+    @param  declaredMethods булево значение, где
+    true - методы с любым модификатором доступа(private, protected...)
+    false- только public
+     **/
     private static void checkMethods(Class<?> c, boolean declaredMethods) {
-        Method[] a;
+        Method[] methods;
         if (declaredMethods)
-            a = c.getDeclaredMethods();
+            methods = c.getDeclaredMethods();
         else
-            a = c.getMethods();
+            methods = c.getMethods();
 
-        for (Method method : a) {
+        for (Method method : methods) {
 
             if (method.isAnnotationPresent(BeforeSuite.class)) {
                 validateBeforeSuite(method);
