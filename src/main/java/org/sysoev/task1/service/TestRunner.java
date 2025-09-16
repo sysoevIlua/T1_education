@@ -1,7 +1,7 @@
-package org.sysoev.service;
+package org.sysoev.task1.service;
 
-import org.sysoev.annotations.*;
-import org.sysoev.exceptions.AnnotationException;
+import org.sysoev.task1.annotations.*;
+import org.sysoev.task1.exceptions.AnnotationException;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
