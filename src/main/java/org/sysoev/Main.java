@@ -1,10 +1,11 @@
 package org.sysoev;
 
-import org.sysoev.service.TestRunner;
-import org.sysoev.service.TestService;
+
+import org.sysoev.task2.AllStreamMethods;
 
 public class Main {
     public static void main(String[] args) {
-        TestRunner.runTests(TestService.class);
+        AllStreamMethods allStreamMethods = new AllStreamMethods();
+        allStreamMethods.startAllStreamMethods();
     }
 }

@@ -1,4 +1,4 @@
-package org.sysoev.service;
+package org.sysoev.task1.service;
 
 import java.util.Map;
 
