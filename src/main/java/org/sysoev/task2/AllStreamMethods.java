@@ -93,13 +93,9 @@ public class AllStreamMethods {
         String randomString = "java python java sql python java spring sql python java";
 
         Arrays.stream(randomString.split(" "))
-                .map(word -> new AbstractMap.SimpleEntry<>(word, 1))
-                .collect(Collectors.toMap(
-                        Map.Entry::getKey,
-                        Map.Entry::getValue,
-                        Integer::sum
-                ))
-                .forEach((word,count) -> System.out.println(word + " : " + count));
+                .filter(word -> !word.isEmpty())
+                .collect(Collectors.groupingBy(word -> word, Collectors.counting()))
+                .forEach((word,count) -> System.out.println(word + " : " + count));;
 
         System.out.println("----------------");
     }
