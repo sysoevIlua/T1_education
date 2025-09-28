@@ -1,6 +1,6 @@
-package org.sysoev.service;
+package org.sysoev.task1.service;
 
-import org.sysoev.annotations.*;
+import org.sysoev.task1.annotations.*;
 
 import java.util.HashMap;
 import java.util.Map;
