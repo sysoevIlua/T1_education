@@ -1,40 +1,37 @@
 package org.sysoev;
 
-import org.sysoev.task3.SelfThreadPool;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
+import org.sysoev.task4.entity.User;
+import org.sysoev.task4.service.UserService;
 
-import java.util.concurrent.atomic.AtomicInteger;
 
+@ComponentScan
 public class Main {
-    private static volatile int primitiveInt = 0;
-    private static volatile Integer wrapperInt  = 0;
-    private static AtomicInteger atomicInt = new AtomicInteger(0);
-    public static void main(String[] args) throws InterruptedException {
-        SelfThreadPool pool = new SelfThreadPool(3);
+    public static void main(String[] args) {
+        ApplicationContext context = new AnnotationConfigApplicationContext(Main.class);
 
-        for (int i = 0; i < 6000; i++) {
 
-            final int taskId = i;
-            pool.execute(() -> {
-                System.out.println(Thread.currentThread().getName() + " выполняет задачу " + taskId);
-                primitiveInt++;
-                wrapperInt++;
-                atomicInt.incrementAndGet();
-            });
-        }
+        UserService userService = context.getBean(UserService.class);
 
-        pool.shutdown();
+        userService.createUser("Илья");
+        userService.createUser("Алексей");
+        userService.createUser("Гена");
+        System.out.println("Пользователи были созданы");
 
-        // Пробуем после shutdown добавить задачу
-        try {
-            pool.execute(() -> System.out.println("--------------"));
-        } catch (IllegalStateException e) {
-            System.out.println(e.getMessage());
-        }
+        System.out.println("Все пользователи:");
+        userService.getAllUsers().forEach(user -> System.out.println(user.toString()));
 
-        pool.awaitTermination();
+        Long id = 6L;
+        User user = userService.getUser(id);
+        System.out.println("Получен пользователь: " + user.toString()+ " с id: "+ id);
+        userService.updateUser(user.getId(), "тестТЕСТ123");
+        System.out.println("После обновления: " + userService.getUser(id).toString());
 
-        System.out.println("primitiveInt = "+ primitiveInt);
-        System.out.println("wrapperInt = "+ wrapperInt);
-        System.out.println("atomicInt = "+ atomicInt);
+        userService.deleteUser(user.getId());
+        System.out.println("После удаления:");
+        userService.getAllUsers().forEach(System.out::println);
+
     }
 }
