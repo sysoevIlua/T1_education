@@ -3,6 +3,7 @@ package org.sysoev.task5;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.sysoev.task5.entity.User;
 import org.sysoev.task5.service.UserService;
 
 @SpringBootApplication
@@ -26,7 +27,7 @@ public class Application implements CommandLineRunner {
         System.out.println("После добавления:");
         userService.getAllUsers().forEach(System.out::println);
 
-        var user = userService.getAllUsers().getFirst();
+        User user = userService.getAllUsers().getFirst();
         userService.updateUser(user.getId(), "Обновлённый " + user.getUsername());
         System.out.println("После обновления:");
         userService.getAllUsers().forEach(System.out::println);
