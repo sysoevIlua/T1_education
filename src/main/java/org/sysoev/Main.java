@@ -3,8 +3,8 @@ package org.sysoev;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
-import org.sysoev.task4.entity.User;
-import org.sysoev.task4.service.UserService;
+import org.sysoev.task5.entity.User;
+import org.sysoev.task5.service.UserService;
 
 
 @ComponentScan
